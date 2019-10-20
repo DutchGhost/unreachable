@@ -1,8 +1,8 @@
 #![no_std]
-//! This crate provides a user implementation of the `unreachable_unchecked()` function.
+//! This crate provides a user implementation of the `unreachable_unchecked()` function. See [unreachable_unchecked](fn.unreachable_unchecked.html).
 
 /// A workaround to be able to name the `!` type on the stable compiler.
-/// See https://github.com/rust-lang/rust/issues/58733
+/// See https://github.com/rust-lang/rust/issues/58733.
 trait Bang {
     type Output: ?Sized;
 }
