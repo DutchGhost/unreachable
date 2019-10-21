@@ -5,6 +5,7 @@ os:
 language: rust
 rust:
   - 1.6.0
+  - stable
 
 script:
   - cargo build
