@@ -1,22 +1,13 @@
 #![no_std]
 //! This crate provides a user implementation of the `unreachable_unchecked()` function. See [unreachable_unchecked](fn.unreachable_unchecked.html).
 
-/// A workaround to be able to name the `!` type on the stable compiler.
-/// See https://github.com/rust-lang/rust/issues/58733.
-trait Bang {
-    type Output: ?Sized;
-}
+/// An empty enum.
+/// Any match on an instance of this is unreachable.
+enum Void {}
 
-impl <T: ?Sized> Bang for fn() -> T {
-    type Output = T;
-}
-
-/// Alias `!` as `Never`.
-type Never = <fn() -> ! as Bang>::Output;
-
-/// Tell the compiler there is an external static of the `!` type.
+/// Tell the compiler there is an external static of the `Void` type.
 extern {
-    static NEVER: Never;
+    static VOID: Void;
 }
 
 /// Informs the compiler that this point in the code is not reachable, enabling
@@ -45,7 +36,7 @@ extern {
 /// ```
 #[inline]
 pub unsafe fn unreachable_unchecked() -> ! {
-    NEVER
+    match VOID {}
 }
 
 #[cfg(test)]
